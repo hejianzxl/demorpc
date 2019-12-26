@@ -4,6 +4,8 @@ import com.july.demo.rpc.configuration.Configuation;
 import com.july.demo.transport.demo.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -11,9 +13,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * 抽象RPC server
  */
-public abstract class AbstractServer implements RpcServer {
+public abstract class AbstractServer implements RpcServer, InitializingBean {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractServer.class);
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        this.start();
+    }
 
     private AtomicBoolean status = new AtomicBoolean(false);
 

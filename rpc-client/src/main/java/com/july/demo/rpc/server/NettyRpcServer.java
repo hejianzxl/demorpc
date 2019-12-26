@@ -1,6 +1,10 @@
 package com.july.demo.rpc.server;
 
 import com.july.demo.rpc.configuration.Configuation;
+import com.july.demo.rpc.handler.RpcClientHandler;
+import com.july.transport.protocol.RpcDecoder;
+import com.july.transport.protocol.RpcEncoder;
+import com.july.transport.protocol.RpcRequest;
 import com.july.demo.transport.demo.registry.Registry;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -41,7 +45,6 @@ public class NettyRpcServer extends AbstractServer {
         serverBootstrap = new ServerBootstrap();
         boss = new NioEventLoopGroup(1);
         worker = new NioEventLoopGroup(Runtime.getRuntime().availableProcessors()+1);
-        this.start();
     }
 
     @Override
@@ -58,9 +61,9 @@ public class NettyRpcServer extends AbstractServer {
                 protected void initChannel(SocketChannel channel) throws Exception {
                     channel.pipeline().addLast(new LengthFieldBasedFrameDecoder(65536, 0, 4, 0, 0))
                             //字符串解码 和 编码
-                            //.addLast(new DeedDecoder(DeedRequest.class))
-                            //.addLast(new DeedEncoder(DeedResponse.class))
-                            //.addLast(new ServerHandler());
+                            .addLast(new RpcDecoder())
+                            .addLast(new RpcEncoder())
+                            .addLast(new RpcClientHandler())
                     .addLast(new IdleStateHandler(10,10,5));
                 }
             }).option(ChannelOption.SO_BACKLOG, 128)
