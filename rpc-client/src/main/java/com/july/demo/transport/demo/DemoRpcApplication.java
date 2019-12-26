@@ -1,6 +1,6 @@
 package com.july.demo.transport.demo;
 
-import com.july.demo.transport.demo.rpc.configuration.RpcServerConfiguation;
+import com.july.demo.rpc.configuration.RpcServerConfiguation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

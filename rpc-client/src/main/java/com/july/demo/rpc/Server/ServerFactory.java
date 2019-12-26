@@ -1,4 +1,4 @@
-package com.july.demo.rpc.Server;
+package com.july.demo.rpc.server;
 
 public interface ServerFactory {
 

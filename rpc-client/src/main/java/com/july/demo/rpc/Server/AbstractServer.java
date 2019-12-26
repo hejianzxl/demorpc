@@ -1,9 +1,11 @@
-package com.july.demo.rpc.Server;
+package com.july.demo.rpc.server;
 
-import com.july.demo.registry.Registry;
 import com.july.demo.rpc.configuration.Configuation;
+import com.july.demo.transport.demo.registry.Registry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 
 /**
@@ -12,6 +14,8 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractServer implements RpcServer {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractServer.class);
+
+    private AtomicBoolean status = new AtomicBoolean(false);
 
     private Configuation configuation;
 
@@ -30,6 +34,11 @@ public abstract class AbstractServer implements RpcServer {
     }
 
     public void start() {
+        if(status.get()) {
+            logger.warn("rpc server status is run");
+            return;
+        }
+        status.compareAndSet(false, true);
         RpcServer rpcServer = this.createRpcServer();
         if(logger.isInfoEnabled())
             logger.info("Rpc Server {} is start success", rpcServer.getServerInfo().getAddress() + ":" + rpcServer.getServerInfo().getPort());
@@ -47,5 +56,13 @@ public abstract class AbstractServer implements RpcServer {
      */
     public Registry getRegistry() {
         return this.registry;
+    }
+
+    /**
+     * 获取当前RPC服务状态
+     * @return
+     */
+    public boolean isRun() {
+        return this.status.get();
     }
 }

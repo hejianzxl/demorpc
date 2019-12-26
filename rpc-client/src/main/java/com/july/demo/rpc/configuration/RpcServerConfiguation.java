@@ -7,11 +7,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicLong;
 
-@ConfigurationProperties("rpc")
+@ConfigurationProperties("rpc.config")
 public class RpcServerConfiguation extends AbstractConfiguation {
 
-
-    Executor executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1, new ThreadFactory() {
+    // 初始化线程池
+    static final Executor executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() + 1, new ThreadFactory() {
         private final AtomicLong tNum = new AtomicLong(0);
 
         @Override
@@ -23,6 +23,6 @@ public class RpcServerConfiguation extends AbstractConfiguation {
 
     @Override
     public ServerInfo serverInfo() {
-        return null;
+        return this;
     }
 }

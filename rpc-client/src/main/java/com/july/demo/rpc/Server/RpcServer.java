@@ -1,7 +1,7 @@
-package com.july.demo.rpc.Server;
+package com.july.demo.rpc.server;
 
-import com.july.demo.registry.Registry;
 import com.july.demo.rpc.configuration.Configuation;
+import com.july.demo.transport.demo.registry.Registry;
 
 
 /**
