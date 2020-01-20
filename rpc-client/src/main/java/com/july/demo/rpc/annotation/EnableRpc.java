@@ -10,4 +10,6 @@ import java.lang.annotation.*;
 @Documented
 @Import({RpcAutoConfiguration.class, RpcConfigurationRegistrar.class})
 public @interface EnableRpc {
+
+    String name = "";
 }

@@ -21,7 +21,6 @@ public class RpcChannel implements Serializable {
         return this;
     }
 
-
     public Channel getChannel() {
         return this.channel;
     }

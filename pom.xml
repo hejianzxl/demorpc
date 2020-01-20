@@ -6,11 +6,12 @@
 	<modules>
 		<module>name-service</module>
 		<module>rpc-client</module>
-		<module>rpc-transport</module>
+		<module>rpc-remoting</module>
 		<module>rpc-serialization</module>
         <module>rpc-registry</module>
 		<module>rpc-common</module>
-	</modules>
+        <module>rpc</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

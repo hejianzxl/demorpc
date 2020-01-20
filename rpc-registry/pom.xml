@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>registry</artifactId>
+    <artifactId>rpc-registry</artifactId>
 
     <name>registry</name>
     <!-- FIXME change it to the project's website -->

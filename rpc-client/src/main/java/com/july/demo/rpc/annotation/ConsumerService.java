@@ -11,4 +11,6 @@ import java.lang.annotation.*;
 @Documented
 @Inherited
 public @interface ConsumerService {
+
+    String name = "";
 }

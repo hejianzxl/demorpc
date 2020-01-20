@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>rpc-common</artifactId>
+    <artifactId>rpc-remoting</artifactId>
 
-    <name>common</name>
+    <name>transport</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -22,6 +22,16 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.july</groupId>
+            <artifactId>rpc-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.july</groupId>
+            <artifactId>rpc-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
