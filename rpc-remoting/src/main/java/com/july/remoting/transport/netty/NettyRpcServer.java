@@ -36,7 +36,12 @@ public class NettyRpcServer extends AbstractServer {
     private RpcConnectManageHandler rpcConnectManageHandler = null;
 
     public NettyRpcServer() {
-       this(null);
+       this(new Configuation() {
+           @Override
+           public ServerInfo serverInfo() {
+               return new ServerInfo();
+           }
+       });
     }
 
     public NettyRpcServer(Configuation configuation) {
@@ -57,8 +62,8 @@ public class NettyRpcServer extends AbstractServer {
 
     @Override
     public RpcServer createRpcServer() {
-        int port = ConfiguationUitls.getPort(super.getConfiguation().ge);
-        String host = ConfiguationUitls.getHost(super.getConfiguation());
+        int port = ConfiguationUitls.getPort(super.getConfiguation().serverInfo().getPort());
+        String host = ConfiguationUitls.getHost(super.getConfiguation().serverInfo().getAddress());
         rpcChannelHandler = new RpcChannelHandler(new DefaultChannelHandler());
         rpcConnectManageHandler = new RpcConnectManageHandler();
         try {
@@ -71,7 +76,7 @@ public class NettyRpcServer extends AbstractServer {
                     channel.pipeline()
                             .addLast(new LengthFieldBasedFrameDecoder(65536, 0, 4, 0, 0))
                             //字符串解码 和 编码
-                            .addLast(new Rpcde)
+                            .addLast(new RpcDecoder())
                             .addLast(new RpcEncoder())
                             .addLast(rpcConnectManageHandler)
                             .addLast(rpcChannelHandler)

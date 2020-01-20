@@ -9,7 +9,7 @@ public class RpcServertTest {
     public static void main(String[] args) throws Exception{
         RpcServer rpcServer = new NettyRpcServer().createRpcServer();
         System.out.println(rpcServer.getChannels().size());
-
+        System.out.println("1");
         Thread.sleep(1000000L);
     }
 }
